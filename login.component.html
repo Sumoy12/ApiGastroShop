@@ -1,0 +1,32 @@
+<mat-card  class="car"  appearance="outlined">
+  <h1>INICIAR SESIÓN</h1>
+</mat-card>
+<div class="container mt-5">
+  <div class="card mx-auto mb-3 mt-3 shadow bg-body rounded" style="width: 33%">
+    <div class="card-body">
+      <div class="">
+        <img class="rounded mx-auto d-block" src="../../../assets/img/logo.png" alt="logo" srcset="" width="100px" height="100px">
+      </div>
+      <form >
+        <div class="mb-3">
+            <label for="usuario" class="form-label">Usuario:</label>
+            <input type="text" name="usuario" id="usuario" formControlName="usuario" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" name="password" id="password" formControlName="password" class="form-control">
+
+        </div>
+      <div class="row mb-3">
+        <a routerLink="/catalogo" type="submit"   class="btn btn-outline-primary mb-2">
+        INICIAR SESIÓN
+        </a >
+        <a routerLink="/registrar" type="submit"   class="btn btn-outline-success mb-2" >
+        REGISTRAR
+        </a>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>

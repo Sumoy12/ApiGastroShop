@@ -1,0 +1,176 @@
+<div class="container">
+    
+    <div class="container-informacion bg-light mt-4">
+        <h2>Gestión de Proveedor</h2>
+        <!-- Tarjeta para Agrupación de Filtros -->
+        <div class="card mb-4 bg-light">
+            <div class="card-body">
+                <div class="row g-3 justify-content-center">
+
+                    <!-- Filtro por Nombre -->
+                    <div class="col-auto text-center">
+                        <div class="mb-3">
+                            <label for="filtroNombre" class="form-label text-primary">Filtrar Nombre</label>
+                            <select class="form-select form-select-sm" id="filtroNombre" [(ngModel)]="filtroNombre" (change)="filtrar()">
+                                <option value="">Todos</option>
+                                <option *ngFor="let nombre of nombres" [value]="nombre">{{ nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filtro por Telefono -->
+                    <div class="col-auto text-center">
+                        <div class="mb-3">
+                            <label for="filtroTelefono" class="form-label text-primary">Filtrar por Telefono</label>
+                            <input type="text" class="form-control form-control-sm" id="filtroTelefono" [(ngModel)]="filtroTelefono" (input)="filtrar()">
+                        </div>
+                    </div>
+
+                    <!-- Filtro por Estado Booleano -->
+                    <div class="col-auto text-center">
+                        <div class="mb-3">
+                            <!-- Título del Filtro -->
+                            <label for="filtroEstado" class="form-label text-primary">Filtrar por Estado</label>
+                            <!-- Checkbox para Filtro de Estado Activo -->
+                            <div class="d-flex align-items-center">
+                                <input type="checkbox" id="filtroEstado" [(ngModel)]="filtroEstado" (change)="filtrar()">
+                                <label for="filtroEstado" class="form-check-label ms-2">Activos</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Botón de Agregar Proveedor -->
+        <div class="container-fluid mb-4">
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button type="button" class="btn btn-success shadow" data-bs-toggle="modal" data-bs-target="#ProveedorModal">Agregar Proveedor</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Tabla de Proveedores -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-success text-white">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Proveedor of paginatedItems; trackBy: trackById">
+                                <td>{{ Proveedor.proveedorId }}</td>
+                                <td>{{ Proveedor.nombre }}</td>
+                                <td>{{ Proveedor.email }}</td>
+                                <td>{{ Proveedor.telefono }}</td>
+                                <td>{{ getEstadoDescripcion(Proveedor.estado) }}</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProveedorModal" (click)="selectedProveedor = Proveedor">
+                                        <i class="bi bi-pencil"></i> 
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" (click)="eliminarProveedor(Proveedor.proveedorId)">
+                                        <i class="bi bi-trash"></i> 
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav *ngIf="totalPages > 1">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" [class.disabled]="page === 1">
+                            <button class="page-link" (click)="page = page - 1" [disabled]="page === 1">Anterior</button>
+                        </li>
+                        <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === i + 1">
+                            <button class="page-link" (click)="page = i + 1">{{ i + 1 }}</button>
+                        </li>
+                        <li class="page-item" [class.disabled]="page === totalPages">
+                            <button class="page-link" (click)="page = page + 1" [disabled]="page === totalPages">Siguiente</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Registro -->
+    <div class="modal fade" id="ProveedorModal" tabindex="-1" aria-labelledby="ProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="ProveedorModalLabel">Agregar Proveedor</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" [(ngModel)]="newProveedor.nombre" name="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" [(ngModel)]="newProveedor.email" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Telefono</label>
+                            <input type="text" class="form-control" id="telefono" [(ngModel)]="newProveedor.telefono" name="telefono">
+                        </div>
+                        <!--<div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="estado" [(ngModel)]="newProveedor.estado" name="estado">
+                        </div>-->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" (click)="addProveedor()">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Editar Registro -->
+    <div class="modal fade" id="editProveedorModal" tabindex="-1" aria-labelledby="editProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="editProveedorModalLabel">Editar Proveedor</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form *ngIf="selectedProveedor">
+                        <div class="mb-3">
+                            <label for="editNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editNombre" [(ngModel)]="selectedProveedor.nombre" name="editNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="editEmail" [(ngModel)]="selectedProveedor.email" name="editEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTelefono" class="form-label">Telefono</label>
+                            <input type="text" class="form-control" id="editTelefono" [(ngModel)]="selectedProveedor.telefono" name="editTelefono">
+                        </div>
+                        <!--<div class="mb-3">
+                            <label for="editEstado" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="editEstado" [(ngModel)]="selectedProveedor.estado" name="editEstado">
+                        </div>-->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" (click)="updateProveedor()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+.car{
+    background-color: red;
+    color: white;
+    display: flex;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+   }
+
+   h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  /* Estilos para el título */
+.container h2 {
+  font-size: 2rem; /* Tamaño de fuente del título */
+  font-weight: bold; /* Negrita */
+  text-transform: uppercase; /* Capitalizar */
+  color: #007bff; /* Color del texto */
+  margin-bottom: 20px; /* Espacio inferior del título */
+  text-align: center; /* Centrar el texto */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+  padding: 20px;
+  background-color: #f8f9fa; /* Color de fondo */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  border: 1px solid #ddd; /* Borde */
+}
+
+/* Estilos para los filtros de búsqueda */
+.form-label {
+  font-weight: bold; /* Negrita */
+  color: #007bff; /* Color del texto */
+}
+
+.form-select, .form-control {
+  border-radius: 0.25rem; /* Bordes redondeados */
+  border: 1px solid #ced4da; /* Borde de los campos */
+}
+
+.form-select:focus, .form-control:focus {
+  border-color: #80bdff; /* Color del borde en foco */
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Sombra del campo en foco */
+}
+
+/* Estilos para la tabla */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden; /* Oculta el desbordamiento para bordes redondeados */
+}
+
+.table th, .table td {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.table thead th {
+  background-color: #007bff; /* Color de fondo de encabezado */
+  color: #fff; /* Color del texto */
+  border-top: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilos para los botones */
+.btn-success {
+  border-radius: 0.25rem; /* Bordes redondeados */
+}
+
+.btn-danger {
+  border-radius: 0.25rem; /* Bordes redondeados */
+}
+
+/* Estilos para el formulario de agregar perfil */
+form {
+  margin-top: 20px;
+}
+
+form .form-label {
+  font-weight: bold; /* Negrita */
+  color: #007bff; /* Color del texto */
+}
+
+form .form-control {
+  margin-bottom: 10px; /* Espacio inferior entre campos del formulario */
+}
+
+/* Estilos para el botón de agregar perfil */
+.btn-success {
+  border-radius: 0.25rem; /* Bordes redondeados */
+}

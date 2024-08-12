@@ -1,0 +1,50 @@
+.h1 {
+  text-align: center;
+}
+
+.row {
+  gap: 30px; /* Espacio entre los elementos */
+  justify-content: center;
+}
+
+.car {
+  background-color: red;
+  color: white;
+  display: flex;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+}
+
+.card {
+  margin-bottom: 20px;
+  overflow: hidden; /* Asegura que las imágenes no se salgan del contenedor */
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-img-top {
+  transition: transform 0.3s ease; /* Añade una transición para la animación */
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1); /* Amplía la imagen al 110% */
+}
+
+.btn {
+  width: 100%;
+}
+
+/* Estilos para el botón de agregar */
+.btn-outline-secondary {
+  border-color: #007bff; /* Color del borde (azul) */
+  color: #007bff; /* Color del texto (azul) */
+}
+
+.btn-outline-secondary:hover {
+  background-color: #007bff; /* Color de fondo al pasar el mouse (azul) */
+  color: white; /* Color del texto al pasar el mouse (blanco) */
+  border-color: #007bff; /* Color del borde al pasar el mouse (azul) */
+}

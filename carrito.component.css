@@ -1,0 +1,31 @@
+.h1 {
+  text-align: center;
+}
+
+.row {
+  gap: 30px; /* Espacio entre los elementos */
+  justify-content: center;
+}
+
+.car {
+  background-color: red;
+  color: white;
+  display: flex;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}

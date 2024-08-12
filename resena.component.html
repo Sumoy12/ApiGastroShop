@@ -1,0 +1,183 @@
+<mat-card  class="car"  appearance="outlined">
+  <h1>RESEÑA</h1>
+</mat-card>
+
+<div class="container">
+
+  <div class="container-informacion bg-light mt-4">
+      <h2>RESEÑA</h2>
+
+      <!-- Tarjeta para Agrupación de Filtros -->
+      <div class="card mb-4 bg-light">
+          <div class="card-body">
+              <div class="row g-3 justify-content-center">
+                  <!-- Filtro por Producto -->
+                  <div class="col-auto text-center">
+                      <div class="mb-3">
+                          <label for="filtroIdResena" class="form-label text-primary">Buscar por Id Reseña</label>
+                          <input type="range" class="form-range" id="filtroIdResena" min="0" max="200" step="1"  [(ngModel)]="filtroIdResena" (input)="filtrar()">
+                          <div class="d-flex justify-content-between">
+                            <span>0</span>
+                            <span>{{ filtroIdResena }}</span>
+                            <span>200</span>
+                        </div>
+                        </div>
+                  </div>
+
+
+                  <!-- Filtro por Cantidad -->
+                  <div class="col-auto text-center">
+                      <div class="mb-3">
+                          <label for="filtroIdUsuario" class="form-label text-primary">Filtrar Id Usuario</label>
+                          <input type="range" class="form-range" id="filtroIdUsuario" min="0" max="200" step="1" [(ngModel)]="filtroIdUsuario" (input)="filtrar()">
+                          <div class="d-flex justify-content-between">
+                              <span>0</span>
+                              <span>{{ filtroIdUsuario }}</span>
+                              <span>200</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Filtro por Proveedor -->
+                  <div class="col-auto text-center">
+                      <div class="mb-3">
+                          <label for="filtroNombreUsuario" class="form-label text-primary">Filtrar Nombre Usuario</label>
+                          <input type="text" class="form-control form-control-sm" id="filtroNombreUsuario" [(ngModel)]="filtroNombreUsuario" (input)="filtrar()">
+                        </div>
+                    </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Botón de Agregar Inventario -->
+
+      <!-- Tabla de Inventario -->
+      <div class="container">
+            <div class="row mt-3">
+              <div class="col-md-12 d-flex justify-content-end">
+                  <button type="button" class="btn btn-success shadow" data-bs-toggle="modal" data-bs-target="#resenaModal">Agregar Reseña</button>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                      <thead class="bg-success text-white">
+                          <tr>
+                              <th>Id</th>
+                              <th>Id Usuario</th>
+                              <th>Nombre Usuario</th>
+                              <th>Comentario</th>
+
+                               <th>Acción</th>
+
+
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let resena of paginatedItems; trackBy: trackById">
+                              <td>{{ resena.resenaId }}</td>
+                              <td>{{ resena.usuarioId }}</td>
+                              <td>{{ resena.usuario.usuarioNombre }}</td>
+                              <td>{{ resena.comentario }}</td>
+                              <!--
+                               <td>{{ resena.calificacion }}</td>
+                              -->
+
+
+                              <td>
+                                  <button class="btn btn-warning mx-" data-bs-toggle="modal" data-bs-target="#editResenaModal" (click)="selectedResena = resena">
+                                      <i class="bi bi-pencil"></i>
+                                  </button>
+                                  <button class="btn btn-danger" (click)="eliminarResumen(resena.resenaId)">
+                                      <i class="bi bi-trash"></i>
+                                  </button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <nav *ngIf="totalPages > 1">
+                  <ul class="pagination justify-content-center">
+                      <li class="page-item" [class.disabled]="page === 1">
+                          <button class="page-link" (click)="page = page - 1" [disabled]="page === 1">Anterior</button>
+                      </li>
+                      <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === i + 1">
+                          <button class="page-link" (click)="page = i + 1">{{ i + 1 }}</button>
+                      </li>
+                      <li class="page-item" [class.disabled]="page === totalPages">
+                          <button class="page-link" (click)="page = page + 1" [disabled]="page === totalPages">Siguiente</button>
+                      </li>
+                  </ul>
+              </nav>
+          </div>
+      </div>
+
+
+
+
+
+  <!-- Modal Nuevo Registro -->
+  <div class="modal fade" id="resenaModal" tabindex="-1" aria-labelledby="resenaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="resumeModalLabel">Agregar Reseña</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="mb-3">
+                          <label for="comentario" class="form-label">Comentario</label>
+                          <input type="text" class="form-control" id="comentario" [(ngModel)]="newResena.comentario" name="comentario">
+                      </div>
+                      <!--
+                       <div class="mb-3">
+                          <label for="calificacion" class="form-label">Calificacion</label>
+                          <select class="form-select" id="calificacion" [(ngModel)]="newResena.calificacion" name="calificacion">
+                            <option *ngFor="let calificacion" [value]="calificacion">{{ calificacion }}</option>
+                        </select>
+                      </div>
+                      -->
+
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="addResena()">Agregar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <!-- Modal de Editar Registro -->
+  <div class="modal fade" id="editResenaModal" tabindex="-1" aria-labelledby="editResenaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editResenaModalLabel">Editar Reseña</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form *ngIf="selectedResena">
+                      <div class="mb-3">
+                          <label for="editComentario" class="form-label">Comentario</label>
+                          <input type="text" class="form-control" id="comentario" [(ngModel)]="newResena.comentario" name="comentario">
+                      </div>
+                      <div class="mb-3">
+                          <label for="editCalificacion" class="form-label">Calificacion</label>
+                          <select class="form-select" id="calificacion" [(ngModel)]="newResena.calificacion" name="calificacion">
+                            <option *ngFor="let calificacion" [value]="calificacion">{{ calificacion }}</option>
+                        </select>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="updateResena()">Actualizar</button>
+              </div>
+          </div>
+      </div>
+  </div>

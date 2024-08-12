@@ -1,0 +1,46 @@
+
+
+.car{
+    background-color: red;
+    color: white;
+    display: flex;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+   }
+ 
+
+   .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-control-lg {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  .btn-outline-success {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #0a0a0a;
+    border-color: #0a0a0a;;
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem;
+  }  
