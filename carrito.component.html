@@ -1,0 +1,94 @@
+<mat-card class="car" appearance="outlined">
+  <h1 class="h1">Carrito Shop</h1>
+</mat-card>
+
+<mat-card class="mt-2">
+
+
+
+  <div class="d-flex justify-content-center">
+    <span class="fs-3 fw-bolder"> Mi pedido -  #{{orderCarritoImp}}</span>
+  </div>
+  <div class="d-flex justify-content-end">
+    <span class="p-4 fs-4">Valor: $ {{valorCompra}}</span>
+
+  </div>
+
+
+
+
+
+
+   <mat-card-content>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="carritoId">
+          <th mat-header-cell *matHeaderCellDef>N° Orden</th>
+          <td mat-cell *matCellDef="let element"> {{element.carritoId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productoId">
+          <th mat-header-cell *matHeaderCellDef>Id Produto</th>
+          <td mat-cell *matCellDef="let element"> {{element.productoId}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="productoNombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.productoNombre}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="precioCarrito">
+          <th mat-header-cell *matHeaderCellDef> Precio </th>
+          <td mat-cell *matCellDef="let element"> {{element.precioCarrito}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estadoCarritoEnum">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.estadoCarritoEnum}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+          <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+        </ng-container>
+        <ng-container matColumnDef="subtotal">
+          <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+          <td mat-cell *matCellDef="let element"> {{element.cantidad * element.precioCarrito}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef='accion'>
+          <th mat-header-cell *matHeaderCellDef>Acción</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button mat-mdc-button-base (click)="agregarProducto(element.cantidad, element.productoId)">+</button>
+            <button mat-raised-button  (click)="reducirProducto(element.cantidad, element.productoId)">-</button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+      <div class="row">
+          <div class="d-flex justify-content-center">
+            <button mat-raised-button color="primary"  (click)="pagarCarrito(this.dataSource, this.request_)">Pagar</button>
+            <button mat-raised-button [routerLink]="['/catalogo']" routerLinkActive="router-link-active" >cancelar</button>
+            <button mat-raised-button class="bg-danger text-white" (click)="eliminarCarrito(this)">Eliminar</button>
+          </div>
+
+      </div>
+
+
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+
+

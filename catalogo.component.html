@@ -1,0 +1,31 @@
+<div>
+  <mat-card class="car" appearance="outlined">
+    <h1>CATALOGO</h1>
+  </mat-card>
+
+  <div class="container my-3 p-3">
+    <div class="row">
+      @for (item of productos; track item) {
+      <div class="card" style="width: 18rem">
+        <br />
+        <img  [src]="item.rutaImg" alt="" class="card-img-top" alt="" />
+        <div class="card-body">
+          <p class="d-none">{{item.productoId}}</p>
+          <p class="d-none">{{item.categoriaId}}</p>
+          <h5 class="card-title fs-5">{{ item.productoNombre }}</h5>
+          <p class="text-center">{{item.productoDescripcion}}</p>
+          <p><span class="fw-bolder fs-6">$ {{item.productoPrecio}}</span></p>
+          <a
+
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="AgregarCarrito(item)"
+            >
+            <i class="bi bi-plus"></i> Agregar
+          </a>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<mat-card class="car" appearance="outlined">
+    <h1>FACTURACIÓN</h1>
+  </mat-card>
+
+  <div class="container mt-4">
+    <h2 class="text-center">Detalles de la facturacion</h2>
+
+    <mat-card  appearance="outlined">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Datos del Cliente</h3>
+          <div class="container mx-5">
+            <mat-form-field class="example-full-width">
+              <label >Cedula:</label>
+            <input matInput disabled value="0909090909">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width mx-2">
+            <label >Nombre:</label>
+            <input matInput disabled value="Danna">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <label >Apellido:</label>
+            <input matInput disabled value="Carrillo">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width mx-2">
+            <label >Correo:</label>
+            <input matInput disabled value="Danna@gmail.com">
+          </mat-form-field>
+          <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Detalles de la Compra</h3>
+          <div class="container ">
+            <mat-form-field class="example-full-width">
+              <label >N° Orden:</label>
+              <input matInput disabled value="7">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width ">
+              <label >Id Producto:</label>
+              <input matInput disabled value="4">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <label >Nombre Producto:</label>
+            <input matInput disabled value="Hamburguesa Doble">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width mx-2">
+            <label >Precio:</label>
+            <input matInput disabled value="$ 7.99">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width mx-2">
+            <label >Cantidad:</label>
+          <input matInput disabled value="1">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width mx-2">
+            <label >Subtotal:</label>
+          <input matInput disabled value="$ 7.99">
+          </mat-form-field>
+          <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Pago</h3>
+          <div class="container ">
+            <mat-form-field class="example-full-width ">
+              <label >Metodo Pago:</label>
+            <input matInput disabled value="Efectivo">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width ">
+            <label >Monto de Pago:</label>
+            <input matInput disabled value="$ 7.99">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <label >Descuento:</label>
+            <input matInput disabled value="$ 0.00">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width ">
+            <label >Iva Agregado (15%):</label>
+            <input matInput disabled value="$ 1.19">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width ">
+            <label >Total a Pagar:</label>
+            <input matInput disabled value="$ 7.99">
+          </mat-form-field>
+          <br>
+          </div>
+        </div>
+      </div>
+
+      <div id="liveAlertPlaceholder">
+      <div class="text-center">
+        <a routerLink="/home" id="liveAlertBtn" class="btn btn-outline-primary btn-lg" (click)="openDialog()" style="display: block; margin: 0 auto;">
+         Pagar
+        </a>
+      </div>
+    </div>
+    </mat-card>
+    </div>
+
+
+
+
+

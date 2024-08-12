@@ -1,0 +1,85 @@
+<!-- src/app/components/perfil/perfil.component.html -->
+<div class="container mt-4">
+  <h2>Perfiles</h2>
+
+  <!-- Filtros de búsqueda -->
+   <!-- Filtro por ID -->
+   <div class="col-auto text-center">
+      <div class="mb-3">
+          <label for="filtroId" class="form-label text-primary">Filtrar por ID</label>
+          <input type="number" class="form-control form-control-sm" id="filtroId" (input)="onSearchIdChange($event)">
+      </div>
+  </div>
+
+  <!-- Filtro por Nombre -->
+  <div class="col-auto text-center">
+      <div class="mb-3">
+          <label for="filtroNombre" class="form-label text-primary">Filtrar por Nombre</label>
+          <input type="text" class="form-control form-control-sm" id="filtroNombre" [(ngModel)]="filtroNombre" (input)="onSearchNombreChange($event)">
+      </div>
+  </div>
+
+  <!-- Filtro por Usuario -->
+  <div class="col-auto text-center">
+      <div class="mb-3">
+          <label for="filtroUsuario" class="form-label text-primary">Filtrar por Usuario</label>
+          <select class="form-select form-select-sm" id="filtroUsuario" [(ngModel)]="filtroUsuario" (change)="filtrar()">
+              <option value="">Todos</option>
+              <option *ngFor="let perfil of perfiles" [value]="perfil.usuarioPerfil">{{ perfil.usuarioPerfil }}</option>
+          </select>
+      </div>
+  </div>
+
+
+  <!-- Tabla de perfiles -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let perfil of filteredPerfiles">
+        <td>{{ perfil.perfilId }}</td>
+        <td>{{ perfil.nombrePerfil }}</td>
+        <td>{{ perfil.usuarioPerfil }}</td>
+        <td>
+          <!-- Implementa botones para modificar y eliminar -->
+          <button (click)="selectPerfil(perfil)" class="btn btn-primary btn-sm">Editar</button>
+          <button (click)="deletePerfil(perfil.perfilId)" class="btn btn-danger btn-sm">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Implementa formulario para agregar nuevo perfil -->
+  <div class="mt-4">
+    <h3>Agregar Nuevo Perfil</h3>
+    <form (ngSubmit)="createPerfil(newPerfil)">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" id="nombre" class="form-control" [(ngModel)]="newPerfil.nombrePerfil" name="nombre" required />
+      </div>
+      <div class="mb-3">
+          <label for="apellidos" class="form-label">Apellidos</label>
+          <input type="text" id="apellidos" class="form-control" [(ngModel)]="newPerfil.apellidosPerfil" name="apellidos" required />
+      </div>
+      <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" id="email" class="form-control" [(ngModel)]="newPerfil.emailPerfil" name="email" required />
+      </div>
+      <div class="mb-3">
+        <label for="usuario" class="form-label">Usuario</label>
+        <input type="text" id="usuario" class="form-control" [(ngModel)]="newPerfil.usuarioPerfil" name="usuario" required />
+      </div>
+      <div class="mb-3">
+        <label for="contraseña" class="form-label">Contraseña</label>
+        <input type="password" id="contraseña" class="form-control" [(ngModel)]="newPerfil.passwordPerfil" name="contraseña" required />
+      </div>
+      <button type="submit" class="btn btn-success">Agregar Perfil</button>
+    </form>
+  </div>
+</div>

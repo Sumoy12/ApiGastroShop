@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="container-informacion mt-4">
+      <h2>Gestión de Productos</h2>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="mb-3">
+                  <label for="filtroNombre" class="form-label">Buscar por IdProducto</label>
+                  <input type="text" class="form-control" id="filtroNombre" [(ngModel)]="filtroNombre" (input)="filtrar()">
+              </div>
+          </div>
+          <div class="col-md-6 text-end">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productoModal">
+                  Agregar Producto
+              </button>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Producto ID</th>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Precio</th>
+                          <th>Categoría</th>
+                          <th>Disponibilidad</th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let producto of paginatedItems; trackBy: trackById">
+                          <td>{{ producto.productoId }}</td>
+                          <td>{{ producto.nombre }}</td>
+                          <td>{{ producto.descripcion }}</td>
+                          <td>{{ producto.precio }}</td>
+                          <td>{{ producto.categoria }}</td>
+                          <td>{{ producto.disponibilidad }}</td>
+                          <td>
+                              <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductoModal" (click)="selectedProducto = producto">
+                                  <i class="bi bi-pencil"></i>
+                              </button>
+                              <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto.productoId)">
+                                  <i class="bi bi-trash"></i>
+                              </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <nav *ngIf="totalPages > 1">
+                  <ul class="pagination justify-content-center">
+                      <li class="page-item" [class.disabled]="page === 1">
+                          <button class="page-link" (click)="page = page - 1" [disabled]="page === 1">Anterior</button>
+                      </li>
+                      <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === i + 1">
+                          <button class="page-link" (click)="page = i + 1">{{ i + 1 }}</button>
+                      </li>
+                      <li class="page-item" [class.disabled]="page === totalPages">
+                          <button class="page-link" (click)="page = page + 1" [disabled]="page === totalPages">Siguiente</button>
+                      </li>
+                  </ul>
+              </nav>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal Nuevo Producto -->
+  <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="productoModalLabel">Agregar Producto</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="mb-3">
+                          <label for="productoNombre" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="productoNombre" [(ngModel)]="newProducto.nombre" name="productoNombre">
+                      </div>
+                      <div class="mb-3">
+                          <label for="productoDescripcion" class="form-label">Descripción</label>
+                          <textarea class="form-control" id="productoDescripcion" [(ngModel)]="newProducto.descripcion" name="productoDescripcion"></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label for="productoPrecio" class="form-label">Precio</label>
+                          <input type="number" class="form-control" id="productoPrecio" [(ngModel)]="newProducto.precio" name="productoPrecio">
+                      </div>
+                      <div class="mb-3">
+                          <label for="productoCategoria" class="form-label">Categoría</label>
+                          <input type="text" class="form-control" id="productoCategoria" [(ngModel)]="newProducto.categoria" name="productoCategoria">
+                      </div>
+                      <div class="mb-3">
+                          <label for="productoDisponibilidad" class="form-label">Disponibilidad</label>
+                          <input type="number" class="form-control" id="productoDisponibilidad" [(ngModel)]="newProducto.disponibilidad" name="productoDisponibilidad">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="addProducto()">Agregar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal de Editar Producto -->
+  <div class="modal fade" id="editProductoModal" tabindex="-1" aria-labelledby="editProductoModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editProductoModalLabel">Editar Producto</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form *ngIf="selectedProducto">
+                      <div class="mb-3">
+                          <label for="editProductoNombre" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="editProductoNombre" [(ngModel)]="selectedProducto.nombre" name="editProductoNombre">
+                      </div>
+                      <div class="mb-3">
+                          <label for="editProductoDescripcion" class="form-label">Descripción</label>
+                          <textarea class="form-control" id="editProductoDescripcion" [(ngModel)]="selectedProducto.descripcion" name="editProductoDescripcion"></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label for="editProductoPrecio" class="form-label">Precio</label>
+                          <input type="number" class="form-control" id="editProductoPrecio" [(ngModel)]="selectedProducto.precio" name="editProductoPrecio">
+                      </div>
+                      <div class="mb-3">
+                          <label for="editProductoCategoria" class="form-label">Categoría</label>
+                          <input type="text" class="form-control" id="editProductoCategoria" [(ngModel)]="selectedProducto.categoria" name="editProductoCategoria">
+                      </div>
+                      <div class="mb-3">
+                          <label for="editProductoDisponibilidad" class="form-label">Disponibilidad</label>
+                          <input type="number" class="form-control" id="editProductoDisponibilidad" [(ngModel)]="selectedProducto.disponibilidad" name="editProductoDisponibilidad">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="updateProducto()">Actualizar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+

@@ -1,0 +1,33 @@
+.h1{
+  text-align: center;
+ }
+
+ .h2{
+    text-align: center;
+ }
+
+ .card-text{ text-align: center;}
+
+ .car{
+    background-color: red;
+    color: white;
+    display: flex;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+   }
+   .card{
+    border: none;
+    border-radius: 0;
+   }
+
+
+
+   .carousel-inner{
+    height: 300px;  /* Ajusta el alto */
+   }
+
+   .row{
+    gap: 30px; /* Espacio entre los elementos */
+    justify-content: center;
+  }

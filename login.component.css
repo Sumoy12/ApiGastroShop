@@ -1,0 +1,17 @@
+.car{
+  background-color: red;
+  color: white;
+  display: flex;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+ }
+
+ .main-body {
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 1348px;
+  mat-form-field {
+    width: 100%;
+  }
+}
